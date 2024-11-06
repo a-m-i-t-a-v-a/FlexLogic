@@ -1,4 +1,4 @@
-import './App.css'
+import './index.css'
 import Header from './components/Header'
 import ProductsList from './components/ProductsList'
 import Sidebar from './components/Sidebar'
