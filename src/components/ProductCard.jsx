@@ -1,7 +1,11 @@
-const ProductCard = () => {
+/* eslint-disable react/prop-types */
+const ProductCard = ({name,image,category,price}) => {
   return (
-    <div>
-      Product card
+    <div className="product-card">
+      <img src={image} alt={name}/>
+      <h3>{name}</h3>
+      <p>{category}</p>
+      <p>${price}</p>
     </div>
   )
 }

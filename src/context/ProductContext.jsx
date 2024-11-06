@@ -9,6 +9,7 @@ export const ProductProvider=({children})=>{
     const [categories,setCategories]=useState([])
     const [brands,setBrands]=useState([])
     const [error,setError]=useState('')
+    const [loading,setLoading]=useState(false)
     const [filters,setFilters]=useState({
         category:[],
         priceRange:[0,500],
@@ -19,6 +20,7 @@ export const ProductProvider=({children})=>{
     const [search,setSearch]=useState('')
 
     useEffect(()=>{
+        setLoading(true)
         const fetchProducts=async()=>{
             try{
                 const response=await fetch('https://dummyjson.com/products');
@@ -42,6 +44,8 @@ export const ProductProvider=({children})=>{
                 }
             }catch(error){
                 setError(error)
+            }finally{
+                setLoading(false)
             }
         }
         fetchProducts()
@@ -52,7 +56,7 @@ export const ProductProvider=({children})=>{
         .filter(product=>filters.category.length>0 ? filters.category.includes(product.category) : true)
         .filter(product=>product.price>=filters.priceRange[0] && product.price<=filters.priceRange[1])
         .filter(product=>filters.brand.length>0 ? filters.brand.includes(product.brand) : true)
-        .filter(product=>filters.availablity ? product.availablity===filters.availablity : true)
+        .filter(product => filters.availablity ? product.availability === filters.availability : true)
         .sort((a,b)=>{
             if(sort==='price-asc') return a.price-b.price
             if(sort==='price-desc') return b.price-a.price
@@ -70,7 +74,8 @@ export const ProductProvider=({children})=>{
             setSort, 
             search, 
             setSearch,
-            error
+            error,
+            loading
         }}>
             {children}
         </ProductContext.Provider>
