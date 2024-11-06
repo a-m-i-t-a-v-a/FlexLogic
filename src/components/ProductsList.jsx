@@ -1,9 +1,10 @@
 import { useContext } from "react"
 import { ProductContext } from "../context/ProductContext"
 import ProductCard from "./ProductCard"
+import Shimmer from "./Shimmer"
 
 const ProductsList = () => {
-  const {filteredProducts,products,sort,setSort}=useContext(ProductContext)
+  const {filteredProducts,products,sort,setSort,loading}=useContext(ProductContext)
   return (
     <main className="product-list">
        <div className="product-header">
@@ -15,7 +16,7 @@ const ProductsList = () => {
          </select>
        </div>
        <div className="product-grid">
-          {filteredProducts.map((product)=>(
+          {loading ? Array.from({length:30}).map((_,index)=><Shimmer key={index}/>) : filteredProducts.map((product)=>(
             <ProductCard 
                 key={product.id} 
                 name={product.name} 
