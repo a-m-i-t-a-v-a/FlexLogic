@@ -140,6 +140,12 @@
   border:1px solid #ddd;
 }
 
+.sort-by{
+  display:flex;
+  flex-direction:row;
+  gap:15px;
+}
+
 .product-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);

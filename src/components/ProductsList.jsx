@@ -9,11 +9,14 @@ const ProductsList = () => {
     <main className="product-list">
        <div className="product-header">
          <p>Showing {filteredProducts.length} out of {products.length} products</p>
-         <select value={sort} onChange={e=>setSort(e.target.value)}>
+         <div className="sort-by">
+          <p>Sort By:</p>
+          <select value={sort} onChange={e=>setSort(e.target.value)}>
             <option value="relevance">Most Relevant</option>
             <option value="price-asc">Price : Low to High</option>
             <option value="price-desc">Price : High to Low</option>
-         </select>
+          </select>
+         </div>
        </div>
        <div className="product-grid">
           {loading ? Array.from({length:30}).map((_,index)=><Shimmer key={index}/>) : filteredProducts.map((product)=>(
